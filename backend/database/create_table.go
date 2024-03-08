@@ -1,6 +1,3 @@
 package database
 
-func CreateTable() {
-	InitDatabase()
-
-}
+//for now empty, upcoming tables are created here

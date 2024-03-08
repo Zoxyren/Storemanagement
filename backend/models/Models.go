@@ -5,10 +5,11 @@ import (
 )
 
 type User struct {
-	ID       uuid.UUID `gorm:"primary_key"`
-	Name     string    `gorm:"size:100"`
-	Email    string    `gorm:"unique"`
-	Password string    `gorm:"size:255"`
+	ID       uuid.UUID `json:"primary_key"`
+	UserID   string    `json:"user_id"`
+	Name     string    `json:"size:100"`
+	Email    string    `json:"unique"`
+	Password string    `json:"size:255"`
 }
 
 type Products struct {
@@ -16,4 +17,11 @@ type Products struct {
 	Name        string  `json:"size:100"`
 	Description string  `json:"unique"`
 	Price       float64 `json:"price"`
+	Image       string  `json:"image"`
+}
+
+type Categories struct {
+	ID          int    `json:"primary_key"`
+	Name        string `json:"size:200"`
+	Description string `json:"unique"`
 }
