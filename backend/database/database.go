@@ -14,7 +14,7 @@ const (
 	dbname   = "storage_db"
 )
 
-func InitDatabase() {
+func InitDatabase() (*sql.DB, error) {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
@@ -28,4 +28,6 @@ func InitDatabase() {
 
 	}
 	defer db.Close()
+	return db, err
+
 }
