@@ -13,11 +13,12 @@ type User struct {
 }
 
 type Products struct {
-	ID          int     `json:"primary_key"`
-	Name        string  `json:"size:100"`
-	Description string  `json:"unique"`
+	ID          int     `json:"id"`
+	Name        string  `json:"name"`
+	Description string  `json:"description"`
 	Price       float64 `json:"price"`
 	Image       string  `json:"image"`
+	Amount      float64 `json:"amount"`
 }
 
 type Categories struct {
