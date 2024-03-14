@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
+	"log/slog"
 	_ "net/http"
 	"storage/controller"
 	"storage/database"
@@ -14,7 +15,10 @@ func InitializeServer() error {
 
 	// GET-Route
 	r.GET("/new", func(c *gin.Context) {
-		database.InitDatabase()
+		_, err := database.InitDatabase()
+		if err != nil {
+			return
+		}
 		c.JSON(200, gin.H{
 			"message": "Tabelle erfolgreich erstellt",
 		})
@@ -22,6 +26,7 @@ func InitializeServer() error {
 
 	// POST-Route
 	r.POST("/product", func(c *gin.Context) {
+		database.InitDatabase()
 		err := controller.InsertProduct(c.Writer, c.Request)
 		if err != nil {
 			c.JSON(500, gin.H{
@@ -35,6 +40,9 @@ func InitializeServer() error {
 		})
 	})
 
-	r.Run() // listen and serve on 0.0.0.0:8080
+	err := r.Run()
+	if err != nil {
+		slog.Error("Failed to start webserver", err)
+	} // listen and serve on 0.0.0.0:8080
 	return nil
 }
