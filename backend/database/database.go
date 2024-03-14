@@ -27,7 +27,6 @@ func InitDatabase() (*sql.DB, error) {
 		log.Fatal("Failed to create table:", err)
 
 	}
-	defer db.Close()
 	return db, err
 
 }
