@@ -22,7 +22,7 @@ func InitDatabase() (*sql.DB, error) {
 	if err != nil {
 		log.Fatal("Error opening database", err)
 	}
-	_, err = db.Exec("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY, DESCRIPTION VARCHAR, PRICE INTEGER, AMOUNT FLOAT)")
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY, NAME VARCHAR,  DESCRIPTION VARCHAR, PRICE INTEGER, AMOUNT FLOAT)")
 	if err != nil {
 		log.Fatal("Failed to create table:", err)
 
