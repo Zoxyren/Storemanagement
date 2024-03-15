@@ -27,7 +27,8 @@ func InsertProduct(w http.ResponseWriter, r *http.Request) error {
 	}
 	// Todo: cant find table?
 	// Einfügen der JSON-Daten in die Datenbank
-	stmt, err := DB.Prepare("INSERT INTO products (ID, NAME, DESCRIPTION, PRICE, AMOUNT) VALUES (?, ?, ?, ?, ?, )")
+	stmt, err := DB.Prepare("INSERT INTO products (id, name, description, price, amount) VALUES ($1, $2, $3, $4, $5)")
+
 	if err != nil {
 		// Fehlerbehandlung
 		http.Error(w, err.Error(), http.StatusInternalServerError)
