@@ -25,7 +25,6 @@ func InsertProduct(w http.ResponseWriter, r *http.Request) error {
 		fmt.Println("The following Json File can not be unmarshald", products)
 		return err
 	}
-	// Todo: cant find table?
 	// Einfügen der JSON-Daten in die Datenbank
 	stmt, err := DB.Prepare("INSERT INTO products (id, name, description, price, amount) VALUES ($1, $2, $3, $4, $5)")
 
