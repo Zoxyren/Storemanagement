@@ -3,9 +3,10 @@ package database
 import (
 	"database/sql"
 	"fmt"
-	"log"
+	"log/slog"
 )
 
+// Todo: add .env variable for database
 const (
 	host     = "localhost"
 	port     = 5433
@@ -20,11 +21,11 @@ func InitDatabase() (*sql.DB, error) {
 		host, port, user, password, dbname)
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
-		log.Fatal("Error opening database", err)
+		slog.Error("Error opening database", err)
 	}
 	_, err = db.Exec("CREATE TABLE IF NOT EXISTS products(ID INTEGER PRIMARY KEY, NAME VARCHAR,  DESCRIPTION VARCHAR, PRICE INTEGER, AMOUNT FLOAT)")
 	if err != nil {
-		log.Fatal("Failed to create table:", err)
+		slog.Error("Failed to create table:", err)
 
 	}
 	return db, err

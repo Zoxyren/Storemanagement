@@ -39,6 +39,16 @@ func InitializeServer() error {
 			"message": "Produkt erfolgreich erstellt",
 		})
 	})
+	r.GET("/products", func(c *gin.Context) {
+		database.InitDatabase()
+		_, err := controller.GetProducts(c.Writer, c.Request)
+		if err != nil {
+			c.JSON(201, gin.H{
+				"message": "Produkt erfolgreich geladen",
+			})
+		}
+		return
+	})
 
 	err := r.Run()
 	if err != nil {
